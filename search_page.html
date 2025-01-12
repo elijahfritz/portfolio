@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Function</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .search-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        input[type="text"] {
+            padding: 10px 40px 10px 20px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            background-color: gray;
+            color: white;
+            width: 300px;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: white;
+        }
+
+        .result {
+            margin-top: 20px;
+            display: none;
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: left;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .result ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .result li {
+            padding: 8px;
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+        }
+
+        .highlight {
+            background-color: #d3f9d8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <i class="search-icon">&#128269;</i>
+        <input type="text" id="search-input" placeholder="Search..." oninput="searchContent()">
+    </div>
+
+    <div class="result" id="result">
+        <h2>Search Results:</h2>
+        <ul id="result-list">
+            <li id="profile">Profile: This is my profile section.</li>
+            <li id="about-me">About Me: I am a web developer and designer.</li>
+            <li id="descriptions">Descriptions: These are descriptions of various topics.</li>
+            <li id="arts">Arts: A showcase of my art pieces and creative work.</li>
+            <li id="apps">Apps: Here are the apps I've built or developed.</li>
+            <li id="commissions">Commissions: Information on accepting commissions.</li>
+        </ul>
+    </div>
+
+    <script>
+        function searchContent() {
+            let input = document.getElementById("search-input").value.toLowerCase();
+            let result = document.getElementById("result");
+            let resultList = document.getElementById("result-list");
+            let items = resultList.getElementsByTagName("li");
+
+            let found = false;
+
+            for (let i = 0; i < items.length; i++) {
+                let itemText = items[i].innerText.toLowerCase();
+                if (itemText.includes(input)) {
+                    items[i].style.display = "";
+                    items[i].classList.add("highlight");
+                    found = true;
+                } else {
+                    items[i].style.display = "none";
+                    items[i].classList.remove("highlight");
+                }
+            }
+
+            result.style.display = found ? "block" : "none";
+        }
+    </script>
+
+</body>
+</html>
